@@ -1,0 +1,315 @@
+@import "tailwindcss";
+
+@theme {
+  /* PRD Architectural Palette */
+  --color-canvas: #111210;
+  --color-surface: #191A17;
+  --color-surface-raised: #22231F;
+  --color-surface-overlay: #2A2B26;
+  --color-text-primary: #F2F0E9;
+  --color-text-secondary: #AAA9A1;
+  --color-text-tertiary: #777870;
+  --color-accent: #B49A72;
+  --color-accent-hover: #C5AB83;
+  --color-accent-muted: rgba(180, 154, 114, 0.15);
+  --color-border: #34352F;
+  --color-border-subtle: #22231F;
+  --color-border-focus: #B49A72;
+
+  /* Aliased design tokens for seamless backwards compatibility */
+  --color-paper: #111210;
+  --color-paper-light: #191A17;
+  --color-white: #191A17;
+  --color-graphite: #F2F0E9;
+  --color-stone: #AAA9A1;
+  --color-olive: #B49A72;
+  --color-olive-dark: #8F7855;
+  --color-olive-light: rgba(180, 154, 114, 0.12);
+  --color-border-warm: #34352F;
+
+  /* Typography Families */
+  --font-display: var(--font-dm-serif), Georgia, Cambria, serif;
+  --font-sans: var(--font-manrope), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  /* Core PRD Tokens */
+  --canvas: #111210;
+  --surface: #191A17;
+  --surface-raised: #22231F;
+  --surface-overlay: #2A2B26;
+  --text-primary: #F2F0E9;
+  --text-secondary: #AAA9A1;
+  --text-tertiary: #777870;
+  --accent: #B49A72;
+  --accent-hover: #C5AB83;
+  --accent-muted: rgba(180, 154, 114, 0.15);
+  --border: #34352F;
+  --border-subtle: #22231F;
+  --border-focus: #B49A72;
+
+  --background: #111210;
+  --foreground: #F2F0E9;
+
+  /* Legacy mapping aliases */
+  --color-paper: #111210;
+  --color-white: #191A17;
+  --color-graphite: #F2F0E9;
+  --color-stone: #AAA9A1;
+  --color-olive: #B49A72;
+  --color-olive-dark: #8F7855;
+  --color-olive-light: rgba(180, 154, 114, 0.12);
+  --color-border-warm: #34352F;
+}
+
+/* Base resets & layout rules */
+html {
+  box-sizing: border-box;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  background-color: #111210;
+  color: #F2F0E9;
+}
+
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #111210;
+  color: #F2F0E9;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar for dark architectural theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #111210;
+}
+::-webkit-scrollbar-thumb {
+  background: #34352F;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B49A72;
+}
+
+/* Editorial & Display Typography Utilities */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.display-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+}
+
+.display-section {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+
+.display-card {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.text-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #B49A72;
+}
+
+.text-caption {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #777870;
+}
+
+.text-mono-spec {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+/* Surfaces & Architecture Cards (No bright gradients, no generic cards) */
+.surface-canvas {
+  background-color: #111210;
+}
+
+.surface-card {
+  background-color: #191A17;
+}
+
+.surface-elevated {
+  background-color: #22231F;
+}
+
+.surface-inset {
+  background-color: #151613;
+  border: 1px solid #34352F;
+}
+
+.card-architectural {
+  background-color: #191A17;
+  border: 1px solid #34352F;
+  border-radius: 0.375rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              background-color 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.card-architectural:hover {
+  background-color: #22231F;
+  border-color: #B49A72;
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(180, 154, 114, 0.15);
+}
+
+/* Hairline dividers & datum lines */
+.border-hairline {
+  border: 1px solid #34352F;
+}
+
+.border-hairline-t {
+  border-top: 1px solid #34352F;
+}
+
+.border-hairline-b {
+  border-bottom: 1px solid #34352F;
+}
+
+.border-hairline-l {
+  border-left: 1px solid #34352F;
+}
+
+.border-hairline-r {
+  border-right: 1px solid #34352F;
+}
+
+/* Architectural Link Styles */
+.link-architectural {
+  color: #AAA9A1;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link-architectural:hover {
+  color: #F2F0E9;
+}
+
+.link-architectural-accent {
+  color: #B49A72;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link-architectural-accent:hover {
+  color: #C5AB83;
+}
+
+.link-editorial {
+  color: #F2F0E9;
+  text-decoration: underline;
+  text-decoration-color: #34352F;
+  text-underline-offset: 0.25em;
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+}
+
+.link-editorial:hover {
+  color: #B49A72;
+  text-decoration-color: #B49A72;
+}
+
+/* Consistent Focus States */
+.focus-ring {
+  outline: none;
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #111210, 0 0 0 4px #B49A72;
+}
+
+/* Form controls design tokens */
+.input-architectural {
+  width: 100%;
+  background-color: #191A17;
+  border: 1px solid #34352F;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #F2F0E9;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  outline: none;
+}
+
+.input-architectural::placeholder {
+  color: #777870;
+}
+
+.input-architectural:focus {
+  background-color: #22231F;
+  border-color: #B49A72;
+  box-shadow: 0 0 0 3px rgba(180, 154, 114, 0.18);
+}
+
+.input-architectural:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #161714;
+}
+
+/* Typography Reveal & Motion Safety */
+.text-reveal-item {
+  display: inline-block;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
