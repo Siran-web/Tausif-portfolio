@@ -211,9 +211,8 @@ export function AboutIntro({ data }: AboutIntroProps) {
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 420px"
-                  className="object-cover object-center filter grayscale contrast-[1.05] hover:grayscale-0 transition-all duration-700 ease-out"
+                  className="object-cover object-center"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent opacity-60" />
               </div>
 
               {/* Technical Caption Strip */}

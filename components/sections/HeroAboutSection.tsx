@@ -292,7 +292,7 @@ export function HeroAboutSection() {
                       fill
                       priority
                       sizes="(max-width: 640px) 100vw, 380px"
-                      className="object-cover object-top filter grayscale contrast-[1.05]"
+                      className="object-cover object-top"
                     />
                   </div>
 
@@ -334,12 +334,6 @@ export function HeroAboutSection() {
                     STUDIO:
                   </span>
                   <span className="tracking-wide">{personal.location}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-text-primary uppercase tracking-wider">
-                    SPECIALITY:
-                  </span>
-                  <span className="tracking-wide">{personal.speciality}</span>
                 </div>
               </div>
 
@@ -420,7 +414,7 @@ export function HeroAboutSection() {
                 <div className="flex items-center gap-2 mb-4">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                   <span className="text-[10px] font-mono uppercase tracking-widest text-text-tertiary font-semibold">
-                    PRACTICE SPECIALITIES
+                    SPECIALITIES
                   </span>
                 </div>
 
@@ -526,11 +520,7 @@ export function HeroAboutSection() {
                       fill
                       priority
                       sizes="(max-width: 1024px) 50vw, 440px"
-                      className="object-cover object-top filter grayscale contrast-[1.05] hover:grayscale-0 transition-all duration-700 ease-out"
-                    />
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent opacity-60 pointer-events-none"
-                      aria-hidden="true"
+                      className="object-cover object-top"
                     />
                   </div>
                 </div>

@@ -175,12 +175,7 @@ export function Hero({
             backgroundSize: "6rem 6rem",
           }}
         />
-        <div className="absolute top-28 left-8 text-xs font-mono text-text-tertiary select-none">
-          + 47.3769° N
-        </div>
-        <div className="absolute top-28 right-8 text-xs font-mono text-text-tertiary select-none hidden sm:block">
-          DATUM // 01
-        </div>
+
       </div>
 
       <Container className="relative z-10">

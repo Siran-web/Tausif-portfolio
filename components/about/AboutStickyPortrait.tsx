@@ -121,12 +121,7 @@ export function AboutStickyPortrait({
               fill
               priority
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 440px"
-              className="object-cover object-top filter grayscale contrast-[1.05] hover:grayscale-0 transition-all duration-700 ease-out"
-            />
-            {/* Subtle Gradient Vignette */}
-            <div
-              className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent opacity-60 pointer-events-none"
-              aria-hidden="true"
+              className="object-cover object-top"
             />
           </div>
         </div>
