@@ -312,4 +312,16 @@ body {
     opacity: 1 !important;
     transform: none !important;
   }
+
+  #coordinate-cursor-layer {
+    display: none !important;
+  }
 }
+
+/* Coordinate Cursor Touch & Pointer Safety */
+@media (pointer: coarse) {
+  #coordinate-cursor-layer {
+    display: none !important;
+  }
+}
+

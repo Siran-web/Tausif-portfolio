@@ -313,6 +313,7 @@ export function HeroAboutSection() {
                   href="#work"
                   variant="primary"
                   size="lg"
+                  magnetic
                   className="uppercase tracking-widest text-xs px-7"
                 >
                   Explore My Work &rarr;
@@ -321,6 +322,7 @@ export function HeroAboutSection() {
                   href="#about"
                   variant="outline"
                   size="lg"
+                  magnetic
                   className="uppercase tracking-widest text-xs px-7"
                 >
                   About Me

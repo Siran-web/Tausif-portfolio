@@ -6,3 +6,4 @@ export * from "./ProjectMetadata";
 export * from "./Typography";
 export * from "./Link";
 export * from "./Surface";
+export * from "./CoordinateCursor";

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Magnetic } from "@/components/animations/Magnetic";
 
 export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "link" | "contrast";
 export type ButtonSize = "sm" | "md" | "lg";
@@ -10,6 +11,7 @@ export interface ButtonBaseProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   rounded?: ButtonRadius;
+  magnetic?: boolean;
   className?: string;
   children: React.ReactNode;
 }
@@ -68,6 +70,7 @@ export const Button = React.forwardRef<
     variant = "primary",
     size = "md",
     rounded = "md",
+    magnetic = false,
     className,
     children,
     ...props
@@ -85,6 +88,12 @@ export const Button = React.forwardRef<
     className
   );
 
+  const content = magnetic ? (
+    <Magnetic maxDistance={4}>{children}</Magnetic>
+  ) : (
+    children
+  );
+
   if ("href" in props && typeof props.href === "string") {
     const { href, external, ...anchorProps } = props as ButtonAsAnchor;
     if (external || href.startsWith("http") || href.startsWith("mailto:")) {
@@ -97,7 +106,7 @@ export const Button = React.forwardRef<
           rel={external ? "noopener noreferrer" : undefined}
           {...anchorProps}
         >
-          {children}
+          {content}
         </a>
       );
     }
@@ -108,7 +117,7 @@ export const Button = React.forwardRef<
         className={commonClasses}
         {...anchorProps}
       >
-        {children}
+        {content}
       </Link>
     );
   }
@@ -121,7 +130,7 @@ export const Button = React.forwardRef<
       className={commonClasses}
       {...buttonProps}
     >
-      {children}
+      {content}
     </button>
   );
 });

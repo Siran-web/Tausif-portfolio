@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Serif_Display, Manrope } from "next/font/google";
 import "./globals.css";
 import { Header, Footer } from "@/components/layout";
+import { CoordinateCursor } from "@/components/ui/CoordinateCursor";
 
 const dmSerif = DM_Serif_Display({
   weight: ["400"],
@@ -33,6 +34,7 @@ export default function RootLayout({
       className={`${dmSerif.variable} ${manrope.variable} h-full antialiased scroll-smooth dark`}
     >
       <body className="min-h-full flex flex-col bg-canvas text-text-primary font-sans overflow-x-clip selection:bg-accent/25 selection:text-text-primary">
+        <CoordinateCursor />
         <Header />
         <main id="main-content" className="flex-1">
           {children}

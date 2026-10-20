@@ -207,6 +207,7 @@ export function SiteHeader() {
             }
             variant="primary"
             size="sm"
+            magnetic
             className="text-xs uppercase tracking-wider ml-2"
           >
             Inquire
