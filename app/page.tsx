@@ -1,19 +1,19 @@
 import {
-  Hero,
+  HeroAboutSection,
+  PhilosophySection,
   ProjectsSection,
-  About,
   ProcessSection,
   ContactSection,
 } from "@/components/sections";
 
 export default function Home() {
   return (
-    <>
-      <Hero />
+    <main>
+      <HeroAboutSection />
+      <PhilosophySection />
       <ProjectsSection />
-      <About />
       <ProcessSection />
       <ContactSection />
-    </>
+    </main>
   );
 }

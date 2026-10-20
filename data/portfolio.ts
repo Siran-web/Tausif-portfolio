@@ -121,8 +121,8 @@ export const portfolioData: PortfolioData = {
     portraitImage: "/images/architect-portrait.jpg",
   },
   navigation: [
-    { label: "Work", href: "#work" },
     { label: "About", href: "#about" },
+    { label: "Work", href: "#work" },
     { label: "Process", href: "#process" },
     { label: "Contact", href: "#contact" },
   ],

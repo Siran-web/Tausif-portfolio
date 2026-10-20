@@ -28,7 +28,7 @@ export function SiteHeader() {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     // 2. Shared IntersectionObserver for tracking active section
-    const sectionIds = ["hero", "work", "about", "process", "contact"];
+    const sectionIds = ["hero", "about", "work", "process", "contact"];
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);

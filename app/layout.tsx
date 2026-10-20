@@ -32,7 +32,7 @@ export default function RootLayout({
       lang="en"
       className={`${dmSerif.variable} ${manrope.variable} h-full antialiased scroll-smooth dark`}
     >
-      <body className="min-h-full flex flex-col bg-canvas text-text-primary font-sans overflow-x-hidden selection:bg-accent/25 selection:text-text-primary">
+      <body className="min-h-full flex flex-col bg-canvas text-text-primary font-sans overflow-x-clip selection:bg-accent/25 selection:text-text-primary">
         <Header />
         <main id="main-content" className="flex-1">
           {children}
