@@ -2,7 +2,6 @@ import {
   HeroAboutSection,
   PhilosophySection,
   ProjectsSection,
-  ProcessSection,
   ContactSection,
 } from "@/components/sections";
 
@@ -12,7 +11,6 @@ export default function Home() {
       <HeroAboutSection />
       <PhilosophySection />
       <ProjectsSection />
-      <ProcessSection />
       <ContactSection />
     </main>
   );

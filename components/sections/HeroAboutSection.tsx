@@ -225,12 +225,7 @@ export function HeroAboutSection() {
             backgroundSize: "6rem 6rem",
           }}
         />
-        <div className="absolute top-28 left-8 text-xs font-mono text-text-tertiary select-none">
-          + 47.3769° N
-        </div>
-        <div className="absolute top-28 right-8 text-xs font-mono text-text-tertiary select-none hidden sm:block">
-          DATUM // 01
-        </div>
+
       </div>
 
       <Container className="relative z-10">
@@ -339,21 +334,7 @@ export function HeroAboutSection() {
                 </div>
               </div>
 
-              {/* Subtle Scroll Indicator */}
-              <div className="hero-scroll-indicator pt-4 flex justify-start">
-                <a
-                  href="#about"
-                  className="group flex items-center gap-3 outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm py-1"
-                  aria-label="Scroll down to About section"
-                >
-                  <div className="relative h-7 w-[1px] bg-border overflow-hidden">
-                    <div className="absolute top-0 left-0 h-3 w-full bg-accent animate-pulse" />
-                  </div>
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-text-tertiary group-hover:text-accent transition-colors">
-                    Scroll to About
-                  </span>
-                </a>
-              </div>
+
             </div>
 
             {/* ─────────────────────────────────────────────────────────

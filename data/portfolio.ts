@@ -103,7 +103,7 @@ export interface PortfolioData {
     category: string;
     items: string[];
   }[];
-  process: ProcessStep[];
+  process?: ProcessStep[];
   projects: Project[];
   experiences: Experience[];
 }
@@ -123,63 +123,12 @@ export const portfolioData: PortfolioData = {
   navigation: [
     { label: "About", href: "#about" },
     { label: "Work", href: "#work" },
-    { label: "Process", href: "#process" },
     { label: "Contact", href: "#contact" },
   ],
   socials: [
     { name: "GitHub", url: "https://github.com" },
     { name: "LinkedIn", url: "https://linkedin.com" },
     { name: "ArchDaily", url: "https://archdaily.com" },
-  ],
-  process: [
-    {
-      step: "01",
-      title: "Spatial Brief & Analysis",
-      subtitle: "Contextual parameters & systemic constraints",
-      description:
-        "Rigorous investigation of site geometry, programmatic needs, environmental daylight orientation, and client specifications to establish core design principles.",
-      deliverables: [
-        "Spatial Diagramming",
-        "Requirement Matrix",
-        "Climatic & Site Studies",
-      ],
-    },
-    {
-      step: "02",
-      title: "Parametric Exploration",
-      subtitle: "Computational modeling & form generation",
-      description:
-        "Iterative algorithmic studies examining structure, proportion, and materiality to derive optimized spatial solutions balanced with aesthetic clarity.",
-      deliverables: [
-        "3D Algorithmic Models",
-        "Structural Framing Studies",
-        "Daylight Simulations",
-      ],
-    },
-    {
-      step: "03",
-      title: "Design Systems & Tectonics",
-      subtitle: "Material specification & interface tokens",
-      description:
-        "Translating architectural form into disciplined component systems, unified design tokens, modular joinery details, and responsive digital frameworks.",
-      deliverables: [
-        "Component Design Systems",
-        "Material Specification",
-        "Interactive Prototypes",
-      ],
-    },
-    {
-      step: "04",
-      title: "Execution & Realization",
-      subtitle: "High-performance deployment & delivery",
-      description:
-        "Final execution bridging structural precision and full-stack engineering. Rigorous quality assurance, performance optimization, and spatial handover.",
-      deliverables: [
-        "Production Codebase",
-        "Architectural Documentation",
-        "Performance Audit",
-      ],
-    },
   ],
   skills: [
     {

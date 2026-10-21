@@ -20,7 +20,7 @@ export function ContactSection() {
     <section id="contact" className="scroll-mt-24 py-20 sm:py-28 lg:py-32 bg-canvas">
       <Container>
         <SectionHeading
-          eyebrow="04 // INQUIRIES"
+          eyebrow="03 // INQUIRIES"
           title="Commission a Project or Spatial System"
           description="Direct all commissions, design system architecture collaborations, or creative engineering inquiries."
           align="split"
