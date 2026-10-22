@@ -17,7 +17,6 @@ export function HeroAboutSection() {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const bioRef = useRef<HTMLParagraphElement>(null);
   const specialitiesRef = useRef<HTMLDivElement>(null);
-  const principlesRef = useRef<HTMLDivElement>(null);
   const desktopPortraitCardRef = useRef<HTMLDivElement>(null);
   const desktopPortraitMaskRef = useRef<HTMLDivElement>(null);
   const desktopPortraitImgRef = useRef<HTMLDivElement>(null);
@@ -185,29 +184,6 @@ export function HeroAboutSection() {
           );
         }
       }
-
-      // Principles Cards Stagger
-      if (principlesRef.current) {
-        const cards = principlesRef.current.querySelectorAll(".principle-card");
-        if (cards && cards.length > 0) {
-          gsap.fromTo(
-            cards,
-            { opacity: 0, y: 24 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.7,
-              stagger: 0.1,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: principlesRef.current,
-                start: "top 80%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        }
-      }
     },
     { scope: wrapperRef }
   );
@@ -217,7 +193,7 @@ export function HeroAboutSection() {
       ref={wrapperRef}
       id="home"
       aria-label="Introduction & About the Architect"
-      className="relative bg-canvas border-b border-border pt-8 sm:pt-12 lg:pt-16 scroll-mt-6"
+      className="relative bg-canvas border-b border-border pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 scroll-mt-6"
     >
 
       {/* Architectural Background Grid & Datum Motif */}
@@ -418,64 +394,6 @@ export function HeroAboutSection() {
                       <span className="h-1.5 w-1.5 rounded-full bg-accent group-hover:scale-125 transition-transform" />
                       <span>{speciality}</span>
                     </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* 3. Design Principles */}
-              <div
-                ref={principlesRef}
-                className="pt-8 border-t border-border space-y-8"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-border/80 pb-5">
-                  <div>
-                    <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-accent font-semibold block mb-2">
-                      {aboutContent.principles.eyebrow || "CORE TENETS"}
-                    </span>
-                    <h3 className="font-display text-2xl sm:text-3xl text-text-primary tracking-tight">
-                      {aboutContent.principles.title}
-                    </h3>
-                  </div>
-                  <p className="text-xs sm:text-sm font-sans text-text-secondary max-w-xs font-light">
-                    Disciplines shaping structural clarity, spatial comfort, and longevity.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-7">
-                  {aboutContent.principles.items.map((principle) => (
-                    <div
-                      key={principle.number}
-                      className="principle-card group rounded-sm border border-border bg-surface p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:border-accent hover:shadow-lg"
-                    >
-                      <div>
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="font-display text-2xl sm:text-3xl text-accent font-normal tracking-tight">
-                            {principle.number}
-                          </span>
-                          <span
-                            className="text-xs font-mono text-text-tertiary select-none group-hover:text-accent transition-colors"
-                            aria-hidden="true"
-                          >
-                            +
-                          </span>
-                        </div>
-
-                        <h4 className="font-display text-lg sm:text-xl text-text-primary mb-2 group-hover:text-accent transition-colors duration-200">
-                          {principle.title}
-                        </h4>
-
-                        <p className="text-xs sm:text-sm leading-relaxed text-text-secondary font-sans font-light">
-                          {principle.description}
-                        </p>
-                      </div>
-
-                      <div className="mt-5 pt-2 border-t border-border/60 flex items-center justify-between">
-                        <span className="h-0.5 w-6 bg-border group-hover:w-10 group-hover:bg-accent block transition-all duration-300" />
-                        <span className="text-[9px] font-mono uppercase tracking-widest text-text-tertiary">
-                          TENET // {principle.number}
-                        </span>
-                      </div>
-                    </div>
                   ))}
                 </div>
               </div>
