@@ -72,7 +72,11 @@ html {
   color: #F2F0E9;
 }
 
-section[id] {
+section[id],
+#home,
+#about,
+#projects,
+#contact {
   scroll-margin-top: 5.5rem;
 }
 

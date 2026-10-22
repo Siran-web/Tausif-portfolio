@@ -140,16 +140,16 @@ export function AboutIntro({ data }: AboutIntroProps) {
           <div className="lg:col-span-7 space-y-8">
             <h2
               ref={headlineRef}
-              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-text-primary leading-[1.12]"
+              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-text-primary leading-[1.12]"
             >
               <span className="block overflow-hidden py-0.5">
                 <span className="line-reveal-inner block">
-                  Designing spaces with clarity,
+                  Beyond structures,
                 </span>
               </span>
               <span className="block overflow-hidden py-0.5">
                 <span className="line-reveal-inner block text-accent italic">
-                  purpose, and character.
+                  creating experiences.
                 </span>
               </span>
             </h2>

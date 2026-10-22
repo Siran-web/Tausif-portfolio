@@ -205,12 +205,10 @@ export function HeroAboutSection() {
   return (
     <section
       ref={wrapperRef}
-      id="hero"
+      id="home"
       aria-label="Introduction & About the Architect"
-      className="relative bg-canvas border-b border-border pt-24 sm:pt-32 lg:pt-36"
+      className="relative bg-canvas border-b border-border pt-24 sm:pt-32 lg:pt-36 scroll-mt-24"
     >
-      {/* Target Anchor for #home link */}
-      <div id="home" className="-translate-y-24 pointer-events-none absolute top-0" aria-hidden="true" />
 
       {/* Architectural Background Grid & Datum Motif */}
       <div
@@ -305,7 +303,7 @@ export function HeroAboutSection() {
               {/* CTAs */}
               <div className="hero-ctas flex flex-wrap items-center gap-4 pt-2">
                 <Button
-                  href="#work"
+                  href="#projects"
                   variant="primary"
                   size="lg"
                   magnetic
@@ -343,7 +341,7 @@ export function HeroAboutSection() {
             <div
               ref={aboutLeftRef}
               id="about"
-              className="scroll-mt-28 pt-16 sm:pt-20 border-t border-border/80 space-y-16 sm:space-y-20"
+              className="scroll-mt-24 pt-16 sm:pt-20 border-t border-border/80 space-y-16 sm:space-y-20"
               aria-label="About the Architect"
             >
               {/* 1. Intro: Eyebrow, Headline, Biography */}
@@ -361,16 +359,16 @@ export function HeroAboutSection() {
 
                 <h2
                   ref={headlineRef}
-                  className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-normal tracking-tight text-text-primary leading-[1.12]"
+                  className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-text-primary leading-[1.12]"
                 >
                   <span className="block overflow-hidden py-0.5">
                     <span className="line-reveal-inner block">
-                      Designing spaces with clarity,
+                      Beyond structures,
                     </span>
                   </span>
                   <span className="block overflow-hidden py-0.5">
                     <span className="line-reveal-inner block text-accent italic">
-                      purpose, and character.
+                      creating experiences.
                     </span>
                   </span>
                 </h2>

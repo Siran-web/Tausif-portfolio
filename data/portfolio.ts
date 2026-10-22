@@ -32,6 +32,17 @@ export interface SpatialZone {
   rooms: string[];
 }
 
+export interface ProjectSpec {
+  label: string;
+  value: string;
+}
+
+export interface DesignNarrativeSection {
+  title: string;
+  subtitle?: string;
+  content: string[];
+}
+
 export interface Project {
   id: string;
   slug: string;
@@ -44,9 +55,12 @@ export interface Project {
   typology: string;
   location: string;
   role: string;
+  status?: string;
   client?: string;
   practice?: string;
   architect?: string;
+  specs?: ProjectSpec[];
+  narrative?: DesignNarrativeSection[];
   link?: string;
   github?: string;
   image?: string;
@@ -111,18 +125,19 @@ export interface PortfolioData {
 export const portfolioData: PortfolioData = {
   personal: {
     name: "Tausif Raza",
-    role: "Architectural Technologist & Creative Engineer",
+    role: "Architect & Interior Designer",
     designPhilosophy:
       "I believe great architecture is found in the balance between form, function, and feeling. Through thoughtful planning, natural materials, and a careful play of light and space, I aim to create meaningful environments that are simple, purposeful, and timeless.",
     speciality: "Architectural Planning & Interior Design",
-    bio: "Focused on the intersection of digital architecture and full-stack software development. Designing disciplined design systems, minimalist interfaces, and performant digital spaces with refined typography and warm materiality.",
-    email: "tausif@studio.arch",
-    location: "Remote",
+    bio: "Dedicated to architectural planning, interior design, space planning, and thoughtful built-environment commissions. Balancing structural clarity, warm materiality, and natural light to create meaningful, enduring spaces.",
+    email: "civiarcherdesigns@gmail.com",
+    location: "India",
     portraitImage: "/images/architect-portrait.jpg",
   },
   navigation: [
+    { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
-    { label: "Work", href: "#work" },
+    { label: "Projects", href: "#projects" },
     { label: "Contact", href: "#contact" },
   ],
   socials: [
@@ -167,105 +182,141 @@ export const portfolioData: PortfolioData = {
   ],
   projects: [
     {
-      id: "sheikh-nawaz-bungalow",
-      slug: "sheikh-nawaz-bungalow",
-      title: "Bungalow — Bihar",
+      id: "courtyard-residence",
+      slug: "courtyard-residence",
+      title: "Courtyard Residence",
       subtitle: "Neoclassical Residential Estate & Architectural Planning",
       category: "Residential",
       description:
-        "A grand neoclassical bungalow commission in Bihar featuring symmetrical columned porticos, a central daylight courtyard, dedicated swimming pool recreation deck, and meticulously planned two-story residential zoning.",
+        "A stately neoclassical residence in Bihar featuring symmetrical columned porticos, an open-air daylight courtyard, integrated swimming pool terrace, and disciplined two-storey spatial zoning.",
       tags: [
         "Architectural Planning",
-        "Interior Design",
-        "Floor Plans",
-        "Bungalow",
+        "Residential Architecture",
+        "Spatial Zoning",
+        "Neoclassical Design",
       ],
       year: "2025 – 2026",
-      typology: "Residential Bungalow",
+      typology: "Private Residential Estate",
       location: "Bihar",
-      client: "Mr. Sheikh Nawaz",
       practice: "CIVI ARCHER DESIGNS",
       architect: "Ar. Tausif Raza",
-      role: "Architectural Planning & Interior Design",
-      link: "/work/sheikh-nawaz-bungalow",
-      image: "/images/projects/sheikh-nawaz-bungalow/exterior-front.jpg",
+      role: "Architectural Planning & Spatial Design",
+      status: "Design & Architectural Documentation Completed",
+      link: "/work/courtyard-residence",
+      image: "/images/projects/courtyard-residence/exterior-front.jpg",
       coverImage: {
-        src: "/images/projects/sheikh-nawaz-bungalow/exterior-front.jpg",
-        alt: "Front facade elevation of Mr. Sheikh Nawaz's neoclassical bungalow in Bihar",
-        caption: "Frontal exterior render showing neoclassical portico, pediment, and grand gated perimeter.",
+        src: "/images/projects/courtyard-residence/exterior-front.jpg",
+        alt: "Symmetrical neoclassical front elevation of Courtyard Residence",
+        caption: "Frontal elevation featuring classical columned portico, pediment, and formal gated entrance perimeter.",
       },
+      specs: [
+        { label: "Typology", value: "Private Residential Estate" },
+        { label: "Location", value: "Bihar" },
+        { label: "Scale", value: "Two-Storey Estate Commission" },
+        { label: "Timeline", value: "2025 – 2026" },
+        { label: "Status", value: "Planning & Design Complete" },
+        { label: "Practice", value: "CIVI ARCHER DESIGNS" },
+        { label: "Lead Architect", value: "Ar. Tausif Raza" },
+        { label: "Documentation", value: "AutoCAD & 3D Visualization" },
+      ],
+      narrative: [
+        {
+          title: "Architectural Intent & Spatial Logic",
+          subtitle: "Form, Geometry & Proportion",
+          content: [
+            "The design of the Courtyard Residence is rooted in classical architectural balance, informed by a disciplined rectilinear grid that resolves the duality between formal public hospitality and intimate familial retreat.",
+            "A prominent entrance portico with classical fluted columns establishes a stately civic presence along the street-facing frontage, while internal volumes unfold sequentially toward a serene central open-air courtyard that anchors the domestic life of the home.",
+          ],
+        },
+        {
+          title: "Daylight, Microclimate & Passive Ventilation",
+          subtitle: "Environmental Integration",
+          content: [
+            "In response to the regional climate of Bihar, the central courtyard acts as an environmental lung, driving stack effect ventilation and drawing cooler air through ground-floor living spaces while exhausting warm air upward.",
+            "Natural daylight penetrates deep into the heart of both ground and upper floor living rooms, minimizing the need for artificial lighting during daylight hours while maintaining continuous visual connection with the sky and changing weather patterns.",
+          ],
+        },
+        {
+          title: "Material Strategy & Outdoor Integration",
+          subtitle: "Tectonics, Water & Landscape",
+          content: [
+            "The material palette balances crisp plasterwork and classical stone detailing on the exterior envelopes with warm timber decking and pergolas in the outdoor recreation realm.",
+            "The private swimming pool terrace is directly accessible from the central family hall, shaded by a columned pergola that softens harsh midday sunlight and establishes a peaceful, sanctuary-like microclimate within the compound walls.",
+          ],
+        },
+      ],
       gallery: [
         {
-          src: "/images/projects/sheikh-nawaz-bungalow/exterior-front.jpg",
-          alt: "Grand front elevation of Bungalow in Bihar",
-          caption: "Fig. 01 — Symmetrical entrance portico with classical fluted columns and arched fenestration.",
+          src: "/images/projects/courtyard-residence/exterior-front.jpg",
+          alt: "Front facade elevation of Courtyard Residence in Bihar",
+          caption: "Fig. 01 — Symmetrical entrance portico with classical fluted columns, pediment detailing, and arched fenestration.",
         },
         {
-          src: "/images/projects/sheikh-nawaz-bungalow/exterior-perspective.jpg",
-          alt: "Aerial corner perspective of Bungalow estate in Bihar",
-          caption: "Fig. 02 — Aerial perspective highlighting perimeter boundary wall, landscaped frontage, and rooflines.",
+          src: "/images/projects/courtyard-residence/exterior-perspective.jpg",
+          alt: "Aerial corner perspective of Courtyard Residence estate in Bihar",
+          caption: "Fig. 02 — Aerial perspective highlighting perimeter boundary wall, landscaped frontage, and cohesive roofline composition.",
         },
         {
-          src: "/images/projects/sheikh-nawaz-bungalow/courtyard-pool.jpg",
+          src: "/images/projects/courtyard-residence/courtyard-pool.jpg",
           alt: "Private swimming pool and pergola garden courtyard",
-          caption: "Fig. 03 — Private 15' x 25' swimming pool with timber decking and vine-draped pergola terrace.",
+          caption: "Fig. 03 — Private swimming pool and leisure terrace framed by treated timber decking and an architectural colonnade pergola.",
         },
       ],
       drawings: [
         {
           id: "ground-floor-plan",
-          title: "Ground Floor Plan",
-          date: "21/04/2026",
-          src: "/images/projects/sheikh-nawaz-bungalow/ground-floor-plan.png",
-          alt: "Ground floor architectural plan for Mr. Sheikh Nawaz Bungalow by CIVI ARCHER DESIGNS",
+          title: "Ground Floor Schematic Plan",
+          date: "2026",
+          src: "/images/projects/courtyard-residence/ground-floor-plan.png",
+          alt: "Ground floor architectural layout schematic for Courtyard Residence",
           description:
             "Primary level organizing formal reception, daily living, primary suites, internal courtyard, and direct outdoor connectivity to pool and terrace decks.",
           spaces: [
-            { name: "Entrance Porch", dimension: "10'-5\" x 8'-9\"" },
-            { name: "Drawing Room", dimension: "22'-1\" x 20'-3\"" },
-            { name: "Central Living Space", dimension: "22'-2\" x 25'-0\"" },
-            { name: "Dining Hall", dimension: "19'-11\" x 14'-11\"" },
-            { name: "Kitchen", dimension: "16'-5\" x 14'-0\"" },
-            { name: "Storage Room", dimension: "7'-0\" x 14'-0\"" },
-            { name: "Utility Space", dimension: "25'-9\" x 5'-0\"" },
-            { name: "Courtyard", dimension: "16'-0\" x 11'-10\"" },
-            { name: "Master Bedroom 01", dimension: "15'-11\" x 20'-3\"" },
-            { name: "Master Bedroom 02", dimension: "13'-10\" x 17'-2\"" },
-            { name: "Dress (Bed 01)", dimension: "7'-6\" x 7'-6\"" },
-            { name: "Toilet (Bed 01)", dimension: "7'-6\" x 8'-0\"" },
-            { name: "Dress (Bed 02)", dimension: "7'-6\" x 8'-5\"" },
-            { name: "Toilet (Bed 02)", dimension: "7'-6\" x 8'-5\"" },
-            { name: "Grand Stair Void", dimension: "22'-2\" x 17'-3\"" },
-            { name: "Swimming Pool", dimension: "15'-0\" x 25'-0\"" },
-            { name: "Poolside Deck", dimension: "3'-8\" x 32'-0\"" },
-            { name: "Wide Deck", dimension: "5'-0\" x 15'-1\"" },
+            { name: "Entrance Porch" },
+            { name: "Drawing Room" },
+            { name: "Central Living Space" },
+            { name: "Dining Hall" },
+            { name: "Kitchen" },
+            { name: "Storage Room" },
+            { name: "Utility Space" },
+            { name: "Courtyard" },
+            { name: "Master Bedroom 01" },
+            { name: "Master Bedroom 02" },
+            { name: "Dress (Bed 01)" },
+            { name: "Toilet (Bed 01)" },
+            { name: "Dress (Bed 02)" },
+            { name: "Toilet (Bed 02)" },
+            { name: "Grand Stair Void" },
+            { name: "Swimming Pool" },
+            { name: "Poolside Deck" },
+            { name: "Garden Terrace" },
           ],
         },
         {
           id: "first-floor-plan",
-          title: "First Floor Plan",
-          date: "19/04/2025",
-          src: "/images/projects/sheikh-nawaz-bungalow/first-floor-plan.png",
-          alt: "First floor architectural plan for Mr. Sheikh Nawaz Bungalow by CIVI ARCHER DESIGNS",
+          title: "First Floor Schematic Plan",
+          date: "2025",
+          src: "/images/projects/courtyard-residence/first-floor-plan.png",
+          alt: "First floor architectural layout schematic for Courtyard Residence",
           description:
             "Upper level dedicated to private family sanctuaries, executive meeting room, state-of-the-art home theater, and open courtyard gallery.",
           spaces: [
-            { name: "Executive Meeting Room", dimension: "22'-1\" x 20'-3\"" },
-            { name: "Upper Living Lounge", dimension: "22'-2\" x 25'-0\"" },
-            { name: "Upper Master Bedroom", dimension: "15'-11\" x 20'-3\"" },
-            { name: "Kids Bedroom", dimension: "13'-10\" x 17'-2\"" },
-            { name: "Theater Room", dimension: "16'-5\" x 14'-0\"" },
-            { name: "Multipurpose Lounge Area", dimension: "19'-11\" x 14'-11\"" },
-            { name: "Courtyard Opening (Void)", dimension: "16'-0\" x 11'-10\"" },
-            { name: "Secondary Staircase", dimension: "7'-0\" x 14'-9\"" },
-            { name: "Grand Stair Circulation", dimension: "22'-2\" x 17'-3\"" },
+            { name: "Executive Meeting Room" },
+            { name: "Upper Living Lounge" },
+            { name: "Upper Master Bedroom" },
+            { name: "Kids Bedroom" },
+            { name: "Theater Room" },
+            { name: "Multipurpose Lounge Area" },
+            { name: "Courtyard Opening (Void)" },
+            { name: "Secondary Staircase" },
+            { name: "Grand Stair Circulation" },
           ],
         },
       ],
       overview: [
-        "Commissioned for Mr. Sheikh Nawaz in Bihar by CIVI ARCHER DESIGNS (under lead architect Ar. Tausif Raza), this bespoke residential estate represents a synthesis of classical architectural symmetry and tailored modern living.",
+        "Conceived as a bespoke residential estate in Bihar by CIVI ARCHER DESIGNS (under lead architect Ar. Tausif Raza), this project represents a synthesis of classical architectural symmetry and tailored modern living.",
         "The residence is grounded on a disciplined rectilinear grid that separates formal guest greeting from private familial zones, unified around a central open-air courtyard that promotes passive ventilation, natural daylight, and visual connectivity.",
-        "Outdoor amenities feature a 15' x 25' swimming pool flanked by treated timber decking and an architectural colonnade pergola, fostering a calm, retreat-like environment within private compound walls.",
+        "Outdoor amenities feature a private swimming pool flanked by treated timber decking and an architectural colonnade pergola, fostering a calm, retreat-like environment within private compound walls.",
       ],
       spatialZoning: [
         {
@@ -277,7 +328,7 @@ export const portfolioData: PortfolioData = {
         {
           zone: "Family Living & Dining Core",
           description:
-            "The heart of the ground floor centers on a 22' x 25' double-height living hall directly adjoining the dining salon, kitchen pantry, and the landscaped courtyard.",
+            "The heart of the ground floor centers on a double-height living hall directly adjoining the dining salon, kitchen pantry, and the landscaped courtyard.",
           rooms: ["Living Space", "Dining Hall", "Kitchen", "Storage", "Utility"],
         },
         {

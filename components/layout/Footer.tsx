@@ -21,7 +21,7 @@ export function Footer() {
               <span className="text-accent">&bull;</span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-text-secondary">
-              Architectural engineering and computational spatial design. Merging disciplined editorial aesthetics with high-performance web systems.
+              Architectural design, interior architecture, and thoughtful built-environment space planning. Translating vision into purposeful, evocative spaces.
             </p>
             <p className="mt-3 text-xs uppercase tracking-widest text-text-tertiary">
               {personal.location}

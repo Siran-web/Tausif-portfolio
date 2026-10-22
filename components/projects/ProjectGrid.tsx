@@ -119,24 +119,20 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
         </div>
       )}
 
-      {/* Projects Grid Container */}
+      {/* Projects Editorial Showcase Container */}
       <div
         id="project-grid-items"
         role="region"
         aria-live="polite"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8"
+        className="space-y-12 sm:space-y-16"
       >
         {filteredProjects.length > 0 ? (
-          filteredProjects.map((project) => (
+          filteredProjects.map((project, idx) => (
             <div
               key={project.slug}
-              className={`project-grid-item col-span-1 ${
-                filteredProjects.length === 1
-                  ? "md:col-span-2 lg:col-span-8 lg:col-start-3"
-                  : "md:col-span-1 lg:col-span-6"
-              } flex flex-col`}
+              className="project-grid-item"
             >
-              <ProjectCard project={project} />
+              <ProjectCard project={project} index={idx} />
             </div>
           ))
         ) : projects.length === 0 ? (

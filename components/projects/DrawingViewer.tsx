@@ -38,7 +38,7 @@ export function DrawingViewer({ drawing, index }: DrawingViewerProps) {
         <div className="flex items-center gap-4 text-xs font-mono text-text-tertiary">
           {drawing.date && <span>DATE: {drawing.date}</span>}
           <span>&bull;</span>
-          <span>AUTOCAD ARCHITECTURAL DWG</span>
+          <span>AUTOCAD ARCHITECTURAL SCHEMATIC</span>
         </div>
       </div>
 
@@ -79,7 +79,7 @@ export function DrawingViewer({ drawing, index }: DrawingViewerProps) {
           />
           <div className="absolute inset-0 bg-canvas/0 group-hover/img:bg-canvas/10 transition-colors flex items-center justify-center pointer-events-none">
             <span className="opacity-0 group-hover/img:opacity-100 transition-opacity bg-canvas/90 text-text-primary border border-border px-3.5 py-1.5 rounded-sm text-xs uppercase tracking-wider font-semibold shadow-lg">
-              Click to Inspect Full 4K Linework &rarr;
+              Click to Inspect Full High-Res Linework &rarr;
             </span>
           </div>
         </div>
@@ -105,7 +105,7 @@ export function DrawingViewer({ drawing, index }: DrawingViewerProps) {
       {drawing.spaces && drawing.spaces.length > 0 && (
         <div className="mt-6 border border-border bg-surface p-5 rounded-sm">
           <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-3">
-            Identified Spaces &bull; Dimensional Schedule
+            Programmatic Space Schedule &bull; Layout Key
           </h4>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 text-xs font-sans">
             {drawing.spaces.map((sp) => (
@@ -142,7 +142,7 @@ export function DrawingViewer({ drawing, index }: DrawingViewerProps) {
                 {drawing.title} — High-Resolution CAD Drawing
               </h4>
               <p className="text-xs text-text-tertiary font-mono">
-                Preserving original room labels, linework, and dimensional annotations
+                Sanitized architectural linework &amp; spatial organization
               </p>
             </div>
             <Button

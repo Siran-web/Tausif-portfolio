@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { Container } from "./Container";
 import { Button } from "@/components/ui/Button";
@@ -10,51 +10,158 @@ import { cn } from "@/lib/utils";
 export function SiteHeader() {
   const { personal, navigation } = portfolioData;
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>("hero");
+  const [activeSection, setActiveSection] = useState<string>("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
 
-  // Single shared mechanism for scroll detection & active section observation
+  // Lock scroll detection during active programmatic smooth scrolls
+  const isNavigatingRef = useRef(false);
+  const navTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  /**
+   * Coordinated smooth navigation to any target section from any scroll position.
+   * Accounts for fixed navbar height, reduced-motion preferences, and updates history.
+   */
+  const scrollToTarget = useCallback((targetId: string, smooth: boolean = true) => {
+    // Graceful aliases for legacy references: work -> projects, hero -> home
+    const resolvedId =
+      targetId === "work" ? "projects" : targetId === "hero" ? "home" : targetId;
+    const targetElement = document.getElementById(resolvedId);
+
+    if (!targetElement) return;
+
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const shouldSmooth = smooth && !prefersReducedMotion;
+    const headerOffset = 80; // Height of fixed navbar with breathing clearance
+
+    // For home, target is top of document (0)
+    let targetY = 0;
+    if (resolvedId !== "home") {
+      const rect = targetElement.getBoundingClientRect();
+      const currentScrollY =
+        window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      targetY = Math.max(0, rect.top + currentScrollY - headerOffset);
+    }
+
+    // Lock observer updates so intermediate passing sections don't hijack active state
+    isNavigatingRef.current = true;
+    setActiveSection(resolvedId);
+
+    if (navTimeoutRef.current) {
+      clearTimeout(navTimeoutRef.current);
+    }
+
+    window.scrollTo({
+      top: targetY,
+      behavior: shouldSmooth ? "smooth" : "auto",
+    });
+
+    // Keep URL hash synchronized without jumping
+    if (typeof window !== "undefined" && window.location.hash !== `#${resolvedId}`) {
+      window.history.pushState(null, "", `#${resolvedId}`);
+    }
+
+    // Release navigation lock once smooth scroll has settled
+    navTimeoutRef.current = setTimeout(
+      () => {
+        isNavigatingRef.current = false;
+      },
+      shouldSmooth ? 850 : 50
+    );
+  }, []);
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const targetId = href.slice(1);
+      scrollToTarget(targetId, true);
+
+      if (mobileMenuOpen) {
+        setMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    }
+  };
+
+  // Passive scroll handler & deterministic active section tracking
   useEffect(() => {
-    // 1. Single passive scroll handler for header styling transition
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 60);
+      const currentScrollY =
+        window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      setIsScrolled(currentScrollY > 50);
+
+      // Skip observer overrides while programmatic navigation is animating
+      if (isNavigatingRef.current) return;
+
+      // 1. User is at the top of the page
+      if (currentScrollY < 120) {
+        setActiveSection("home");
+        return;
+      }
+
+      // 2. User is near the bottom of the page (guarantee Contact is active)
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      if (currentScrollY + windowHeight >= docHeight - 70) {
+        setActiveSection("contact");
+        return;
+      }
+
+      // 3. Evaluate sections in order from bottom to top
+      const readingLine = currentScrollY + 140; // comfortable view line below navbar
+      const sectionOrder = ["contact", "projects", "about", "home"] as const;
+
+      for (const id of sectionOrder) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          const top = rect.top + currentScrollY;
+          if (readingLine >= top) {
+            setActiveSection(id);
+            return;
+          }
+        }
+      }
     };
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // 2. Shared IntersectionObserver for tracking active section
-    const sectionIds = ["hero", "about", "work", "contact"];
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "-25% 0px -65% 0px", // Trigger when section is in comfortable reading view
-        threshold: 0,
+    // Handle browser Back / Forward buttons
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        scrollToTarget(hash, true);
       }
-    );
+    };
 
-    sections.forEach((section) => observer.observe(section));
+    window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener("popstate", handleHashChange);
+
+    // Deep link on initial page load
+    if (typeof window !== "undefined" && window.location.hash) {
+      const initialHash = window.location.hash.replace("#", "");
+      setTimeout(() => {
+        scrollToTarget(initialHash, false);
+      }, 100);
+    }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("popstate", handleHashChange);
+      if (navTimeoutRef.current) clearTimeout(navTimeoutRef.current);
     };
-  }, []);
+  }, [scrollToTarget]);
 
   // Keyboard accessibility for mobile menu (Escape key, Focus management, Scroll lock)
   useEffect(() => {
@@ -99,43 +206,6 @@ export function SiteHeader() {
     };
   }, [mobileMenuOpen]);
 
-  // Controlled smooth scrolling respecting reduced-motion preferences
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
-    if (href.startsWith("#")) {
-      e.preventDefault();
-      const targetId = href.slice(1);
-      const targetElement = document.getElementById(targetId);
-
-      if (targetElement) {
-        const prefersReducedMotion =
-          typeof window !== "undefined" &&
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        const headerOffset = 80;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: prefersReducedMotion ? "auto" : "smooth",
-        });
-
-        // Update active section and URL hash without jumping
-        setActiveSection(targetId);
-        window.history.pushState(null, "", href);
-      }
-
-      if (mobileMenuOpen) {
-        setMobileMenuOpen(false);
-        menuButtonRef.current?.focus();
-      }
-    }
-  };
-
   return (
     <header
       id="site-header"
@@ -149,8 +219,8 @@ export function SiteHeader() {
       <Container className="flex items-center justify-between">
         {/* Architect Wordmark / Brand */}
         <Link
-          href="#hero"
-          onClick={(e) => handleNavClick(e, "#hero")}
+          href="#home"
+          onClick={(e) => handleNavClick(e, "#home")}
           className="group flex items-baseline gap-2 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-sm py-1"
           aria-label={`${personal.name} Studio Home`}
         >

@@ -38,7 +38,7 @@ export interface AboutContent {
 
 export const aboutContent: AboutContent = {
   eyebrow: "ABOUT THE ARCHITECT",
-  headline: "Designing spaces with clarity, purpose, and character.",
+  headline: "Beyond structures, creating experiences.",
   name: "Tausif Raza",
   role: "Architectural Planning & Interior Design",
   biography:
