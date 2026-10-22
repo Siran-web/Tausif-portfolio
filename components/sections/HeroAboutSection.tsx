@@ -33,33 +33,31 @@ export function HeroAboutSection() {
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       if (prefersReducedMotion) {
-        gsap.set(
-          [
-            ".hero-bg-motif",
-            ".hero-eyebrow",
-            ".hero-headline",
-            ".hero-role",
-            ".hero-philosophy",
-            ".hero-ctas",
-            ".hero-specs",
-            ".hero-scroll-indicator",
-            desktopPortraitCardRef.current,
-            desktopPortraitMaskRef.current,
-            desktopPortraitImgRef.current,
-            headlineRef.current?.querySelectorAll(".line-reveal-inner"),
-            bioRef.current,
-            specialitiesRef.current,
-            principlesRef.current?.querySelectorAll(".principle-card"),
-          ],
-          {
+        const motionTargets = [
+          ".hero-bg-motif",
+          ".hero-eyebrow",
+          ".hero-headline",
+          ".hero-role",
+          ".hero-philosophy",
+          ".hero-ctas",
+          ".hero-specs",
+          desktopPortraitCardRef.current,
+          desktopPortraitMaskRef.current,
+          desktopPortraitImgRef.current,
+          bioRef.current,
+          specialitiesRef.current,
+        ].filter(Boolean);
+
+        if (motionTargets.length > 0) {
+          gsap.set(motionTargets, {
             opacity: 1,
             y: 0,
             x: 0,
             scale: 1,
             clipPath: "none",
             clearProps: "all",
-          }
-        );
+          });
+        }
         return;
       }
 
@@ -87,25 +85,36 @@ export function HeroAboutSection() {
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.85, ease: "power4.out" },
           "-=0.5"
-        )
-        .fromTo(
+        );
+
+      if (desktopPortraitCardRef.current) {
+        heroTl.fromTo(
           desktopPortraitCardRef.current,
           { opacity: 0, y: 25 },
           { opacity: 1, y: 0, duration: 0.8 },
           "<0.1"
-        )
-        .fromTo(
+        );
+      }
+
+      if (desktopPortraitMaskRef.current) {
+        heroTl.fromTo(
           desktopPortraitMaskRef.current,
           { clipPath: "inset(100% 0% 0% 0%)" },
           { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: "power3.inOut" },
           "<"
-        )
-        .fromTo(
+        );
+      }
+
+      if (desktopPortraitImgRef.current) {
+        heroTl.fromTo(
           desktopPortraitImgRef.current,
           { scale: 1.08 },
           { scale: 1, duration: 1.3, ease: "power2.out" },
           "<"
-        )
+        );
+      }
+
+      heroTl
         .fromTo(
           ".hero-role",
           { opacity: 0, y: 15 },
@@ -129,12 +138,6 @@ export function HeroAboutSection() {
           { opacity: 0, y: 15 },
           { opacity: 1, y: 0, duration: 0.6 },
           "-=0.3"
-        )
-        .fromTo(
-          ".hero-scroll-indicator",
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: 0.6 },
-          "-=0.2"
         );
 
       // ─────────────────────────────────────────────────────────────
@@ -164,39 +167,46 @@ export function HeroAboutSection() {
           );
         }
 
-        aboutTl.fromTo(
-          [bioRef.current, specialitiesRef.current],
-          { opacity: 0, y: 22 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            stagger: 0.12,
-            ease: "power2.out",
-          },
-          "-=0.3"
+        const bioAndSpecs = [bioRef.current, specialitiesRef.current].filter(
+          (el): el is HTMLParagraphElement | HTMLDivElement => Boolean(el)
         );
+        if (bioAndSpecs.length > 0) {
+          aboutTl.fromTo(
+            bioAndSpecs,
+            { opacity: 0, y: 22 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.7,
+              stagger: 0.12,
+              ease: "power2.out",
+            },
+            "-=0.3"
+          );
+        }
       }
 
       // Principles Cards Stagger
       if (principlesRef.current) {
         const cards = principlesRef.current.querySelectorAll(".principle-card");
-        gsap.fromTo(
-          cards,
-          { opacity: 0, y: 24 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            stagger: 0.1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: principlesRef.current,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+        if (cards && cards.length > 0) {
+          gsap.fromTo(
+            cards,
+            { opacity: 0, y: 24 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.7,
+              stagger: 0.1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: principlesRef.current,
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        }
       }
     },
     { scope: wrapperRef }
@@ -283,7 +293,7 @@ export function HeroAboutSection() {
                       src={personal.portraitImage}
                       alt={`Portrait of ${personal.name}, ${personal.role}`}
                       fill
-                      priority
+                      loading="eager"
                       sizes="(max-width: 640px) 100vw, 380px"
                       className="object-cover object-top"
                     />
@@ -499,7 +509,7 @@ export function HeroAboutSection() {
                       src={personal.portraitImage}
                       alt={`Portrait of ${personal.name}, ${personal.role}`}
                       fill
-                      priority
+                      loading="eager"
                       sizes="(max-width: 1024px) 50vw, 440px"
                       className="object-cover object-top"
                     />
