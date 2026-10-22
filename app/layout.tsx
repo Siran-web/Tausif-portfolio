@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Serif_Display, Manrope } from "next/font/google";
 import "./globals.css";
 import { Header, Footer } from "@/components/layout";
@@ -21,6 +21,13 @@ export const metadata: Metadata = {
   title: "Tausif Raza | Architectural Technologist & Creative Engineer",
   description:
     "Portfolio of Tausif Raza — Spatial systems, architectural monographs, and computational design engineering.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#111210",
 };
 
 export default function RootLayout({

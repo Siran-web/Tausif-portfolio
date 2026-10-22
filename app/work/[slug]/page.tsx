@@ -70,25 +70,29 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       : null;
 
   return (
-    <article className="min-h-screen bg-canvas text-text-primary pt-24 sm:pt-32 pb-24 font-sans selection:bg-accent selection:text-canvas">
-      <Container>
-        {/* Navigation Breadcrumb */}
-        <nav
-          aria-label="Breadcrumb"
-          className="flex items-center justify-between border-b border-border pb-6 mb-12 sm:mb-16"
-        >
-          <Link
-            href="/#projects"
-            className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-text-secondary hover:text-accent transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+    <article className="min-h-screen bg-canvas text-text-primary pb-24 font-sans selection:bg-accent selection:text-canvas">
+      {/* Sticky Return Navigation Bar */}
+      <div className="sticky top-0 z-40 w-full bg-canvas/95 backdrop-blur-md border-b border-border shadow-xs transition-colors">
+        <Container>
+          <nav
+            aria-label="Breadcrumb"
+            className="flex items-center justify-between py-4 sm:py-5 gap-4"
           >
-            <span className="transition-transform duration-200 group-hover:-translate-x-1">&larr;</span>
-            <span>Return to Selected Works</span>
-          </Link>
-          <span className="text-xs font-mono text-text-tertiary uppercase tracking-widest">
-            MONOGRAPH // {project.category.toUpperCase()}
-          </span>
-        </nav>
+            <Link
+              href="/#projects"
+              className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-text-secondary hover:text-accent transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm py-1 shrink-0"
+            >
+              <span className="transition-transform duration-200 group-hover:-translate-x-1">&larr;</span>
+              <span>Return to Selected Works</span>
+            </Link>
+            <span className="text-[11px] sm:text-xs font-mono text-text-tertiary uppercase tracking-widest text-right truncate">
+              MONOGRAPH // {project.category.toUpperCase()}
+            </span>
+          </nav>
+        </Container>
+      </div>
 
+      <Container className="pt-8 sm:pt-12">
         {/* Section A: Project Cover & Brief */}
         <header className="mb-14 sm:mb-20">
           <Eyebrow variant="line" accentColor="brass" className="mb-4">

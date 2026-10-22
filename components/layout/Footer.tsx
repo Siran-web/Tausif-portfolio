@@ -1,11 +1,41 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Container } from "./Container";
 import { portfolioData } from "@/data/portfolio";
+import { scrollToSection, resolveSectionId } from "@/lib/navigation";
 
 export function Footer() {
   const { personal, socials, navigation } = portfolioData;
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHomePage = pathname === "/";
   const currentYear = 2026;
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    const targetId = resolveSectionId(href);
+
+    if (isHomePage) {
+      e.preventDefault();
+      scrollToSection(targetId, { smooth: true });
+    } else {
+      // From project detail route, navigate to homepage section
+      e.preventDefault();
+      router.push(`/#${targetId}`);
+    }
+  };
+
+  const handleBrandClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isHomePage) {
+      e.preventDefault();
+      scrollToSection("home", { smooth: true });
+    }
+  };
 
   return (
     <footer className="mt-auto border-t border-border bg-canvas pt-16 pb-12 font-sans">
@@ -15,6 +45,7 @@ export function Footer() {
           <div className="md:col-span-5">
             <Link
               href="/"
+              onClick={handleBrandClick}
               className="inline-flex items-baseline gap-1 text-2xl font-display text-text-primary outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
             >
               <span>{personal.name}</span>
@@ -34,16 +65,22 @@ export function Footer() {
               Navigation
             </h4>
             <ul className="space-y-2.5">
-              {navigation.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-text-secondary hover:text-text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {navigation.map((item) => {
+                const targetId = resolveSectionId(item.href);
+                const computedHref = isHomePage ? `#${targetId}` : `/#${targetId}`;
+
+                return (
+                  <li key={item.href}>
+                    <a
+                      href={computedHref}
+                      onClick={(e) => handleNavClick(e, item.href)}
+                      className="text-sm text-text-secondary hover:text-text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

@@ -207,7 +207,7 @@ export function HeroAboutSection() {
       ref={wrapperRef}
       id="home"
       aria-label="Introduction & About the Architect"
-      className="relative bg-canvas border-b border-border pt-24 sm:pt-32 lg:pt-36 scroll-mt-24"
+      className="relative bg-canvas border-b border-border pt-8 sm:pt-12 lg:pt-16 scroll-mt-6"
     >
 
       {/* Architectural Background Grid & Datum Motif */}
