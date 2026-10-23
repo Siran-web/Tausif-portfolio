@@ -242,57 +242,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* Section C: Design Narrative (Architectural Thinking, Light, Materials) */}
-        {project.narrative && project.narrative.length > 0 && (
-          <section aria-label="Design Narrative" className="mb-20 sm:mb-28 border-t border-border pt-14">
-            <div className="mb-12">
-              <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-accent block mb-2">
-                02 // DESIGN NARRATIVE
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl text-text-primary">
-                Spatial Organization, Light &amp; Tectonics
-              </h2>
-              <p className="mt-3 text-sm text-text-secondary font-sans max-w-2xl">
-                An editorial exploration into the core principles of classical proportion, regional microclimatic response, and tactile materiality.
-              </p>
-            </div>
-
-            <div className="space-y-12">
-              {project.narrative.map((chapter, idx) => (
-                <div
-                  key={chapter.title}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-b border-border/60 pb-10"
-                >
-                  <div className="lg:col-span-4">
-                    <span className="font-mono text-xs text-accent uppercase tracking-widest block mb-1">
-                      CHAPTER // 0{idx + 1}
-                    </span>
-                    <h3 className="font-display text-xl sm:text-2xl text-text-primary">
-                      {chapter.title}
-                    </h3>
-                    {chapter.subtitle && (
-                      <span className="text-xs font-sans text-text-tertiary uppercase tracking-wider mt-1 block">
-                        {chapter.subtitle}
-                      </span>
-                    )}
-                  </div>
-                  <div className="lg:col-span-8 space-y-4 text-sm sm:text-base leading-relaxed text-text-secondary font-sans">
-                    {chapter.content.map((p, pIdx) => (
-                      <p key={pIdx}>{p}</p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Section D: Visual Documentation (Renders & Perspectives) */}
+        {/* Section C: Visual Documentation (Renders & Perspectives) */}
         {project.gallery && project.gallery.length > 0 && (
           <section aria-label="Visual Documentation" className="mb-20 sm:mb-28 border-t border-border pt-14">
             <div className="mb-10">
               <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-accent block mb-2">
-                03 // VISUAL DOCUMENTATION
+                02 // VISUAL DOCUMENTATION
               </span>
               <h2 className="font-display text-3xl sm:text-4xl text-text-primary">
                 Perspectives, Courtyard &amp; Architectural Enclosure
@@ -333,12 +288,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </section>
         )}
 
-        {/* Section D Continued: Verified Schematic Architectural Drawings */}
+        {/* Section D: Verified Schematic Architectural Drawings */}
         {project.drawings && project.drawings.length > 0 && (
           <section aria-label="Architectural Drawings" className="mb-20 sm:mb-28 border-t border-border pt-14">
             <div className="mb-12">
               <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-accent block mb-2">
-                04 // ARCHITECTURAL SCHEMATICS
+                03 // ARCHITECTURAL SCHEMATICS
               </span>
               <h2 className="font-display text-3xl sm:text-4xl text-text-primary">
                 Technical Floor Plans &amp; Spatial Linework
@@ -356,12 +311,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </section>
         )}
 
-        {/* Section D Continued: Functional Spatial Zoning & Circulation */}
+        {/* Section E: Functional Spatial Zoning & Circulation */}
         {project.spatialZoning && project.spatialZoning.length > 0 && (
           <section aria-label="Spatial Organization" className="mb-20 sm:mb-28 border-t border-border pt-14">
             <div className="mb-10">
               <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-accent block mb-2">
-                05 // PROGRAMMATIC ZONING
+                04 // PROGRAMMATIC ZONING
               </span>
               <h2 className="font-display text-3xl sm:text-4xl text-text-primary">
                 Functional Separation &amp; Circulation Logic

@@ -41,6 +41,8 @@ export interface DesignNarrativeSection {
   title: string;
   subtitle?: string;
   content: string[];
+  image?: string;
+  imageAlt?: string;
 }
 
 export interface Project {
@@ -218,32 +220,6 @@ export const portfolioData: PortfolioData = {
         { label: "Practice", value: "CIVI ARCHER DESIGNS" },
         { label: "Lead Architect", value: "Ar. Tausif Raza" },
         { label: "Documentation", value: "AutoCAD & 3D Visualization" },
-      ],
-      narrative: [
-        {
-          title: "Architectural Intent & Spatial Logic",
-          subtitle: "Form, Geometry & Proportion",
-          content: [
-            "The design of the Courtyard Residence is rooted in classical architectural balance, informed by a disciplined rectilinear grid that resolves the duality between formal public hospitality and intimate familial retreat.",
-            "A prominent entrance portico with classical fluted columns establishes a stately civic presence along the street-facing frontage, while internal volumes unfold sequentially toward a serene central open-air courtyard that anchors the domestic life of the home.",
-          ],
-        },
-        {
-          title: "Daylight, Microclimate & Passive Ventilation",
-          subtitle: "Environmental Integration",
-          content: [
-            "In response to the regional climate of Bihar, the central courtyard acts as an environmental lung, driving stack effect ventilation and drawing cooler air through ground-floor living spaces while exhausting warm air upward.",
-            "Natural daylight penetrates deep into the heart of both ground and upper floor living rooms, minimizing the need for artificial lighting during daylight hours while maintaining continuous visual connection with the sky and changing weather patterns.",
-          ],
-        },
-        {
-          title: "Material Strategy & Outdoor Integration",
-          subtitle: "Tectonics, Water & Landscape",
-          content: [
-            "The material palette balances crisp plasterwork and classical stone detailing on the exterior envelopes with warm timber decking and pergolas in the outdoor recreation realm.",
-            "The private swimming pool terrace is directly accessible from the central family hall, shaded by a columned pergola that softens harsh midday sunlight and establishes a peaceful, sanctuary-like microclimate within the compound walls.",
-          ],
-        },
       ],
       gallery: [
         {
