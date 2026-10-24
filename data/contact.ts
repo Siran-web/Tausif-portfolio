@@ -1,7 +1,36 @@
+/**
+ * Centralized Contact & Social Configuration
+ * Tausif Raza — Architect & Interior Designer
+ */
+export const CONTACT_DETAILS = {
+  email: "civiarcherdesign@gmail.com",
+  mailtoUrl: "mailto:civiarcherdesign@gmail.com",
+  gmailComposeUrl:
+    "https://mail.google.com/mail/?view=cm&fs=1&to=civiarcherdesign@gmail.com",
+  phoneDisplay: "9304448607",
+  phoneTel: "tel:+919304448607",
+  linkedinUrl:
+    process.env.NEXT_PUBLIC_LINKEDIN_URL ||
+    "https://www.linkedin.com/in/tausif-raza-820b7b207/",
+  instagramUrl:
+    process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com",
+  websiteUrl: "https://tausif-portfolio-three.vercel.app/",
+} as const;
+
+export const LINKEDIN_URL: string = CONTACT_DETAILS.linkedinUrl;
+export const INSTAGRAM_URL: string = CONTACT_DETAILS.instagramUrl;
+export const PORTFOLIO_WEBSITE_URL: string = CONTACT_DETAILS.websiteUrl;
+
 export interface ContactInfo {
   heading: string;
   description: string;
   directEmail: string;
+  mailtoUrl: string;
+  gmailComposeUrl: string;
+  phoneDisplay: string;
+  phoneTel: string;
+  linkedinUrl: string;
+  instagramUrl: string;
   operatingTimezone: {
     label: string;
     display: string;
@@ -17,7 +46,13 @@ export const contactInfo: ContactInfo = {
   heading: "Let's Discuss Your Project",
   description:
     "Available for architectural design, interior design, space planning, and thoughtful built-environment projects. Share your ideas, and let's explore how we can bring your vision to life.",
-  directEmail: "civiarcherdesigns@gmail.com",
+  directEmail: CONTACT_DETAILS.email,
+  mailtoUrl: CONTACT_DETAILS.mailtoUrl,
+  gmailComposeUrl: CONTACT_DETAILS.gmailComposeUrl,
+  phoneDisplay: CONTACT_DETAILS.phoneDisplay,
+  phoneTel: CONTACT_DETAILS.phoneTel,
+  linkedinUrl: CONTACT_DETAILS.linkedinUrl,
+  instagramUrl: CONTACT_DETAILS.instagramUrl,
   operatingTimezone: {
     label: "OPERATING TIMEZONE",
     display: "IST (India Standard Time) / UTC+05:30",

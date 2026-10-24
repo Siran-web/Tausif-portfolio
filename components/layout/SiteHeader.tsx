@@ -128,19 +128,15 @@ export function SiteHeader() {
       className="sticky top-0 z-50 w-full border-b border-border bg-[#111210]/95 bg-canvas/95 backdrop-blur-md py-3.5 sm:py-5 transition-colors"
     >
       <Container className="flex items-center justify-between">
-        {/* Architect Wordmark / Brand Logo (Static in document flow on all devices) */}
+        {/* Personal Brand Logo / Architect Wordmark */}
         <Link
           href="#home"
           onClick={(e) => handleNavClick(e, "#home")}
-          className="group flex items-baseline gap-2 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-sm py-1 shrink-0"
-          aria-label={`${personal.name} Studio Home`}
+          className="group flex items-baseline outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-sm py-1 shrink-0"
+          aria-label={`${personal.name} Home`}
         >
           <span className="font-display text-lg sm:text-2xl font-normal tracking-tight text-text-primary group-hover:text-accent transition-colors">
             {personal.name}
-          </span>
-          <span className="h-1.5 w-1.5 rounded-full bg-accent inline-block transition-transform group-hover:scale-125" />
-          <span className="text-[10px] sm:text-[11px] font-sans font-medium uppercase tracking-[0.2em] text-text-tertiary">
-            Studio
           </span>
         </Link>
 

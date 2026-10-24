@@ -55,6 +55,7 @@ export function ContactSection() {
     name: string;
     email: string;
     projectType: string;
+    confirmationEmailSent?: boolean;
   } | null>(null);
 
   // Bot defense: track render timestamp
@@ -63,7 +64,7 @@ export function ContactSection() {
     renderedAtRef.current = Date.now();
   }, []);
 
-  // Live IST Clock for architectural studio status
+  // Live IST Clock for architect availability status
   const [istTime, setIstTime] = useState<string>("");
   useEffect(() => {
     const updateTime = () => {
@@ -145,7 +146,7 @@ export function ContactSection() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/inquire", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -170,6 +171,7 @@ export function ContactSection() {
           name: formData.name.trim(),
           email: formData.email.trim(),
           projectType: formData.projectType,
+          confirmationEmailSent: Boolean(data.confirmationEmailSent),
         });
         setSubmitSuccess(true);
         setFormData(INITIAL_FORM_STATE);
@@ -184,7 +186,7 @@ export function ContactSection() {
         } else {
           setSubmitError(
             data.error ||
-              "Unable to dispatch inquiry. Please try again or email civiarcherdesigns@gmail.com directly."
+              `Unable to dispatch inquiry. Please try again or email ${contactInfo.directEmail} directly.`
           );
         }
       }
@@ -194,7 +196,7 @@ export function ContactSection() {
           ? err.message
           : "Network error occurred while sending your inquiry.";
       setSubmitError(
-        `${msg} Please check your connection or reach out to civiarcherdesigns@gmail.com.`
+        `${msg} Please check your connection or reach out to ${contactInfo.directEmail}.`
       );
     } finally {
       setIsSubmitting(false);
@@ -230,7 +232,7 @@ export function ContactSection() {
         {/* Two-Column Architectural Layout */}
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14 xl:gap-16 items-start">
           {/* ========================================================= */}
-          {/* LEFT PANEL (5 COLS): Architect Information & Studio Specs */}
+          {/* LEFT PANEL (5 COLS): Architect Information & Practice Specs */}
           {/* ========================================================= */}
           <div className="lg:col-span-5 space-y-6">
             <ScrollReveal variant="horizontal" direction="left" distance={25}>
@@ -253,34 +255,150 @@ export function ContactSection() {
 
                 {/* Information Sections */}
                 <div className="space-y-6 border-t border-[#2D2E2A] pt-6 font-sans">
-                  {/* Direct Contact */}
+                  {/* Direct Contact (Email, Gmail compose & Phone) */}
                   <div>
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#777870] block mb-1.5">
-                      {contactInfo.directEmail ? "DIRECT CONTACT" : "DIRECT CONTACT"}
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#777870] block mb-2.5">
+                      DIRECT CONTACT
                     </span>
-                    <a
-                      href={`mailto:${contactInfo.directEmail}`}
-                      className="group inline-flex items-center gap-2 text-sm sm:text-base font-medium text-[#F2F0E9] hover:text-[#B49A72] transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-[#B49A72] rounded-xs"
-                      aria-label={`Send direct email to ${contactInfo.directEmail}`}
-                    >
-                      <svg
-                        className="w-4 h-4 text-[#B49A72] group-hover:translate-x-0.5 transition-transform duration-200"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="1.5"
-                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        />
-                      </svg>
-                      <span className="underline decoration-[#34352F] underline-offset-4 group-hover:decoration-[#B49A72]">
-                        {contactInfo.directEmail}
-                      </span>
-                    </a>
+                    <div className="space-y-3">
+                      {/* Email Row with Primary Mailto & Optional Gmail Compose */}
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                        <a
+                          href={contactInfo.mailtoUrl}
+                          className="group inline-flex items-center gap-2 text-sm sm:text-base font-medium text-[#F2F0E9] hover:text-[#B49A72] transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-[#B49A72] rounded-xs"
+                          aria-label={`Email ${contactInfo.directEmail} (opens default email application)`}
+                        >
+                          <svg
+                            className="w-4 h-4 text-[#B49A72] group-hover:translate-x-0.5 transition-transform duration-200 shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="1.5"
+                              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                            />
+                          </svg>
+                          <span className="underline decoration-[#34352F] underline-offset-4 group-hover:decoration-[#B49A72]">
+                            {contactInfo.directEmail}
+                          </span>
+                        </a>
+
+                        <a
+                          href={contactInfo.gmailComposeUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs text-[#B49A72] hover:text-[#D4BA92] underline decoration-[#B49A72]/40 hover:decoration-[#B49A72] underline-offset-4 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-[#B49A72] rounded-xs"
+                          aria-label={`Open Gmail compose to ${contactInfo.directEmail} in a new tab`}
+                        >
+                          <span>Open in Gmail</span>
+                          <svg
+                            className="w-3 h-3 shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </a>
+                      </div>
+
+                      {/* Phone Number */}
+                      <div>
+                        <a
+                          href={contactInfo.phoneTel}
+                          className="group inline-flex items-center gap-2 text-sm sm:text-base font-medium text-[#F2F0E9] hover:text-[#B49A72] transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-[#B49A72] rounded-xs"
+                          aria-label={`Call ${contactInfo.phoneDisplay}`}
+                        >
+                          <svg
+                            className="w-4 h-4 text-[#B49A72] group-hover:translate-x-0.5 transition-transform duration-200 shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="1.5"
+                              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                            />
+                          </svg>
+                          <span className="underline decoration-[#34352F] underline-offset-4 group-hover:decoration-[#B49A72]">
+                            {contactInfo.phoneDisplay}
+                          </span>
+                        </a>
+                      </div>
+
+                      {/* Social Profiles (LinkedIn & Instagram) */}
+                      <div className="pt-2 border-t border-[#262824]/80 flex items-center gap-4 text-xs">
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#777870]">
+                          SOCIAL:
+                        </span>
+                        <a
+                          href={contactInfo.linkedinUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-center gap-1 font-medium text-xs uppercase tracking-wider text-[#AAA9A1] hover:text-[#B49A72] transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#B49A72] rounded-xs"
+                          aria-label="LinkedIn profile (opens in new tab)"
+                        >
+                          <span className="underline decoration-[#34352F] underline-offset-4 group-hover:decoration-[#B49A72]">
+                            LinkedIn
+                          </span>
+                          <svg
+                            className="w-3 h-3 text-[#B49A72]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </a>
+                        <span className="text-[#34352F]" aria-hidden="true">
+                          &bull;
+                        </span>
+                        <a
+                          href={contactInfo.instagramUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-center gap-1 font-medium text-xs uppercase tracking-wider text-[#AAA9A1] hover:text-[#B49A72] transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#B49A72] rounded-xs"
+                          aria-label="Instagram profile (opens in new tab)"
+                        >
+                          <span className="underline decoration-[#34352F] underline-offset-4 group-hover:decoration-[#B49A72]">
+                            Instagram
+                          </span>
+                          <svg
+                            className="w-3 h-3 text-[#B49A72]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Operating Timezone */}
@@ -300,7 +418,7 @@ export function ContactSection() {
                             className="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-pulse"
                             aria-hidden="true"
                           />
-                          <span>Live Studio Time: {istTime}</span>
+                          <span>Local Time (IST): {istTime}</span>
                         </div>
                       )}
                     </div>
@@ -373,7 +491,7 @@ export function ContactSection() {
                     </div>
 
                     <h4 className="font-display text-2xl text-[#F2F0E9]">
-                      Inquiry Dispatched Successfully
+                      Inquiry Received Successfully
                     </h4>
 
                     <p className="text-sm text-[#AAA9A1] max-w-md mx-auto leading-relaxed">
@@ -383,11 +501,26 @@ export function ContactSection() {
                       <span className="text-[#F2F0E9] font-medium">
                         {submittedSummary?.projectType}
                       </span>{" "}
-                      has been transmitted to{" "}
-                      <span className="text-[#B49A72] font-mono text-xs">
-                        {contactInfo.directEmail}
-                      </span>
-                      . A detailed response will follow shortly.
+                      has been received.
+                      {submittedSummary?.confirmationEmailSent ? (
+                        <>
+                          {" "}
+                          Please check your email (
+                          <span className="text-[#B49A72] font-mono text-xs">
+                            {submittedSummary.email}
+                          </span>
+                          ) for a confirmation.
+                        </>
+                      ) : (
+                        <>
+                          {" "}
+                          A detailed response will follow shortly to{" "}
+                          <span className="text-[#B49A72] font-mono text-xs">
+                            {submittedSummary?.email}
+                          </span>
+                          .
+                        </>
+                      )}
                     </p>
 
                     <div className="pt-4">

@@ -280,7 +280,7 @@ export function HeroAboutSection() {
                       {personal.name}
                     </span>
                     <span className="text-[10px] font-mono text-accent uppercase tracking-widest font-medium">
-                      Studio Practice
+                      Architect &amp; Interior Designer
                     </span>
                   </div>
                 </div>
@@ -312,7 +312,7 @@ export function HeroAboutSection() {
               <div className="hero-specs flex flex-col sm:flex-row sm:items-center gap-y-2.5 gap-x-8 sm:gap-x-12 border-t border-border pt-4 text-xs font-sans text-text-secondary">
                 <div className="flex items-center gap-2">
                   <span className="font-semibold text-text-primary uppercase tracking-wider">
-                    STUDIO:
+                    LOCATION:
                   </span>
                   <span className="tracking-wide">{personal.location}</span>
                 </div>
@@ -339,7 +339,7 @@ export function HeroAboutSection() {
                   </span>
                   <span className="text-border select-none">&bull;</span>
                   <span className="text-[10px] font-mono uppercase tracking-widest text-text-tertiary">
-                    ATELIER TAUSIF RAZA
+                    ARCHITECT &amp; INTERIOR DESIGNER
                   </span>
                 </div>
 
@@ -443,7 +443,7 @@ export function HeroAboutSection() {
                     </span>
                   </div>
                   <span className="text-[10px] font-mono text-accent uppercase tracking-widest font-medium">
-                    Studio Practice // Archive
+                    Architect &amp; Interior Designer
                   </span>
                 </div>
               </div>

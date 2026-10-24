@@ -18,9 +18,9 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Tausif Raza | Architectural Technologist & Creative Engineer",
+  title: "Tausif Raza | Architect & Interior Designer",
   description:
-    "Portfolio of Tausif Raza — Spatial systems, architectural monographs, and computational design engineering.",
+    "Personal portfolio of Tausif Raza — Architect & Interior Designer. Selected architectural works, residential designs, spatial planning, and interior details.",
 };
 
 export const viewport: Viewport = {

@@ -406,10 +406,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </div>
           )}
 
-          {/* Editorial Studio Contact Call to Action */}
+          {/* Personal Contact Call to Action */}
           <div className="border border-border rounded-sm bg-surface p-8 sm:p-12 text-center max-w-3xl mx-auto">
             <span className="text-xs font-mono text-accent uppercase tracking-[0.25em] block mb-3">
-              ARCHITECTURAL PRACTICE &bull; COLLABORATION
+              ARCHITECT & INTERIOR DESIGNER &bull; COLLABORATION
             </span>
             <h3 className="font-display text-2xl sm:text-3xl text-text-primary">
               Have a Project in Mind?

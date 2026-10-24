@@ -4,13 +4,6 @@ export interface DesignPrinciple {
   description: string;
 }
 
-export interface MilestoneItem {
-  year: string;
-  title: string;
-  organization?: string;
-  description?: string;
-}
-
 export interface AboutContent {
   eyebrow: string;
   headline: string;
@@ -33,7 +26,6 @@ export interface AboutContent {
     title: string;
     items: DesignPrinciple[];
   };
-  milestones?: MilestoneItem[];
 }
 
 export const aboutContent: AboutContent = {
@@ -52,7 +44,7 @@ export const aboutContent: AboutContent = {
   image: {
     src: "/images/architect-portrait.jpg",
     alt: "Ar. Tausif Raza — Architectural Planning & Interior Design",
-    caption: "Ar. Tausif Raza // Studio Practice",
+    caption: "Ar. Tausif Raza // Architect & Interior Designer",
   },
   philosophy: {
     eyebrow: "DESIGN PHILOSOPHY",
@@ -90,6 +82,4 @@ export const aboutContent: AboutContent = {
       },
     ],
   },
-  // Optional professional timeline milestones: omitted when not verified to prevent dummy data
-  milestones: undefined,
 };

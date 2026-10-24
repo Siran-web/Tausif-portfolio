@@ -76,28 +76,20 @@ export interface Project {
   featured?: boolean;
 }
 
-export interface Experience {
-  id: string;
-  role: string;
-  company: string;
-  period: string;
-  description: string[];
-  skills: string[];
-}
-
 export interface SocialLink {
   name: string;
   url: string;
   icon?: string;
 }
 
-export interface ProcessStep {
-  step: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  deliverables: string[];
-}
+import {
+  CONTACT_DETAILS,
+  LINKEDIN_URL,
+  INSTAGRAM_URL,
+  PORTFOLIO_WEBSITE_URL,
+} from "./contact";
+
+export { CONTACT_DETAILS, LINKEDIN_URL, INSTAGRAM_URL, PORTFOLIO_WEBSITE_URL };
 
 export interface PortfolioData {
   personal: {
@@ -107,6 +99,10 @@ export interface PortfolioData {
     speciality: string;
     bio: string;
     email: string;
+    phone: string;
+    phoneTel: string;
+    mailtoUrl: string;
+    gmailComposeUrl: string;
     location: string;
     portraitImage: string;
   };
@@ -115,13 +111,7 @@ export interface PortfolioData {
     href: string;
   }[];
   socials: SocialLink[];
-  skills: {
-    category: string;
-    items: string[];
-  }[];
-  process?: ProcessStep[];
   projects: Project[];
-  experiences: Experience[];
 }
 
 export const portfolioData: PortfolioData = {
@@ -132,7 +122,11 @@ export const portfolioData: PortfolioData = {
       "I believe great architecture is found in the balance between form, function, and feeling. Through thoughtful planning, natural materials, and a careful play of light and space, I aim to create meaningful environments that are simple, purposeful, and timeless.",
     speciality: "Architectural Planning & Interior Design",
     bio: "Dedicated to architectural planning, interior design, space planning, and thoughtful built-environment commissions. Balancing structural clarity, warm materiality, and natural light to create meaningful, enduring spaces.",
-    email: "civiarcherdesigns@gmail.com",
+    email: CONTACT_DETAILS.email,
+    phone: CONTACT_DETAILS.phoneDisplay,
+    phoneTel: CONTACT_DETAILS.phoneTel,
+    mailtoUrl: CONTACT_DETAILS.mailtoUrl,
+    gmailComposeUrl: CONTACT_DETAILS.gmailComposeUrl,
     location: "India",
     portraitImage: "/images/architect-portrait.jpg",
   },
@@ -143,44 +137,8 @@ export const portfolioData: PortfolioData = {
     { label: "Contact", href: "#contact" },
   ],
   socials: [
-    { name: "GitHub", url: "https://github.com" },
-    { name: "LinkedIn", url: "https://linkedin.com" },
-    { name: "ArchDaily", url: "https://archdaily.com" },
-  ],
-  skills: [
-    {
-      category: "Spatial & Design Systems",
-      items: [
-        "Design Tokens",
-        "Grid Systems",
-        "Tailwind CSS",
-        "Micro-Interactions",
-        "Typography Hierarchy",
-        "Responsive Logic",
-      ],
-    },
-    {
-      category: "Creative Engineering",
-      items: [
-        "Next.js App Router",
-        "React 19",
-        "TypeScript",
-        "GSAP & ScrollTrigger",
-        "WebGL / Canvas",
-        "Performance Tuning",
-      ],
-    },
-    {
-      category: "Infrastructure & Tools",
-      items: [
-        "Git / Monorepo",
-        "Node.js",
-        "Docker",
-        "Vercel",
-        "Figma",
-        "Parametric Modeling",
-      ],
-    },
+    { name: "LinkedIn", url: LINKEDIN_URL },
+    { name: "Instagram", url: INSTAGRAM_URL },
   ],
   projects: [
     {
@@ -332,19 +290,6 @@ export const portfolioData: PortfolioData = {
         },
       ],
       featured: true,
-    },
-  ],
-  experiences: [
-    {
-      id: "exp-1",
-      role: "Lead Creative Technologist",
-      company: "Atelier Spatial Computing",
-      period: "2024 - Present",
-      description: [
-        "Created unified design systems across web and spatial products using centralized CSS variables and strict token hierarchies.",
-        "Built responsive 12-column layout engines and GSAP-driven transitions operating at 60 FPS on desktop, tablet, and mobile devices.",
-      ],
-      skills: ["TypeScript", "Next.js", "GSAP", "Design Tokens"],
     },
   ],
 };
